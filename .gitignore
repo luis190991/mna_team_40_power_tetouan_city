@@ -95,10 +95,17 @@ target/
 bin/
 
 # exclude data from source control by default
-/data/external
-/data/interim
-/data/processed
-/data/raw
+/data/external/*
+/data/interim/*
+/data/processed/*
+/data/raw/*
+
+# allow DVC metadata and small control files
+!*.dvc
+!.gitignore
+!.dvcignore
+!*/.gitkeep
+
 
 # exclude external models from source control
 /src/external/
