@@ -1,1 +1,23 @@
+name: ml_project
+channels:
+  - conda-forge
+  - defaults
 
+dependencies:
+  - python=3.11
+  - pip
+  - dvc[s3]
+  - pandas
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyter
+  - pyyaml
+  - boto3
+  - pip:
+      - dvc[s3]
+      - awscli
+      - python-dotenv
+      - hydra-core
+      - mlflow
