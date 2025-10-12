@@ -21,3 +21,5 @@ dependencies:
       - python-dotenv
       - hydra-core
       - mlflow
+      - jinja2_time
+      - loguru

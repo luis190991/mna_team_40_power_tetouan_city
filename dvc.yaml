@@ -1,0 +1,21 @@
+stages:
+  clean:
+    cmd: python src/data/clean_data.py
+    deps:
+      - src/data/clean_data.py
+      - data/raw/power_tetouan_city_modified.csv
+      - data/raw/power_tetouan_city_original.csv
+    outs:
+      - data/interim/power_tetouan_city_clean.csv
+
+  preprocess:
+    cmd: python src/data/preprocess.py
+    deps:
+      - src/data/preprocess.py
+      - data/interim/power_tetouan_city_clean.csv
+    outs:
+      - data/processed/power_tetouan_city_ready.csv
+      - data/processed/train.csv
+      - data/processed/val.csv
+      - data/processed/test.csv
+      - models/scaler.pkl
