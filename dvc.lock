@@ -13,24 +13,24 @@ stages:
       size: 4196519
     - path: src/data/clean_data.py
       hash: md5
-      md5: 559bb918257a71d71e2f3d97324397bf
-      size: 1691
+      md5: c1e4ed064931109e7998ded3e99cbcc1
+      size: 3510
     outs:
     - path: data/interim/power_tetouan_city_clean.csv
       hash: md5
-      md5: 62d08923ca460392de12d278c5495661
-      size: 4508058
+      md5: c1b8e917258dc778a7460e3247a36bb1
+      size: 2793513
   preprocess:
     cmd: PYTHONPATH=src python src/data/preprocess.py
     deps:
     - path: data/interim/power_tetouan_city_clean.csv
       hash: md5
-      md5: 62d08923ca460392de12d278c5495661
-      size: 4508058
+      md5: c1b8e917258dc778a7460e3247a36bb1
+      size: 2793513
     - path: src/data/preprocess.py
       hash: md5
-      md5: 18c4a7c5a8aec67c14c6b258381e2416
-      size: 2328
+      md5: 50b3b9c33005ba49b6919d2eaef4099c
+      size: 2055
     outs:
     - path: data/processed/power_tetouan_city_ready.csv
       hash: md5

@@ -21,10 +21,40 @@ class Cleaner:
 
     def basic_cleaning(self):
         """Elimina duplicados, valores vacíos y corrige tipos de datos."""
+        # Se eliminan los nulos.
+        self.df = self.df.dropna()
+        # Se eliminan los duplicados
+        self.df = self.df.drop_duplicates()
+
+        # Convertimos DateTime a formato datetime real
+        self.df["DateTime"] = pd.to_datetime(self.df["DateTime"], errors="coerce")
+
+        # Creamos solo las columnas que nos interesan
+        self.df["hour"] = self.df["DateTime"].dt.hour
+        self.df["day"] = self.df["DateTime"].dt.day
+        self.df["month"] = self.df["DateTime"].dt.month
+        self.df["year"] = self.df["DateTime"].dt.year
+
+        # Eliminamos las columnas no necesarias
+        self.df = self.df.drop(columns=["DateTime", "mixed_type_col"], errors="ignore")
+
+        # 🔹 Convertimos las demás columnas a numéricas (por si quedaron como texto)
+        for col in self.df.columns:
+            self.df[col] = (
+                self.df[col].astype(str).str.replace(",", ".")
+            )
+            self.df[col] = pd.to_numeric(self.df[col], errors="coerce")
+
         logger.info("Limpieza básica completada")
 
     def remove_outliers(self):
         """Detecta y corrige valores atípicos simples."""
+        Outliers = self.eliminarOutliers()
+        logger.info(f"Se han identificado {Outliers.shape[0]} valores atípicos.")
+
+        # Eliminar Outliers / Otra vez valores nulos
+        self.df = self.df.drop(Outliers.index).dropna()
+        
         logger.info("Outliers tratados")
 
     def save_clean_data(self):
@@ -40,6 +70,21 @@ class Cleaner:
         self.remove_outliers()
         self.save_clean_data()
         logger.info("Limpieza completada")
+    
+    def eliminarOutliers(self):
+        df = self.df
+        outliers = pd.DataFrame(columns=df.columns)
+        for col in df.select_dtypes(include=['float64', 'int64']).columns:
+            Q1 = df[col].quantile(0.25)
+            Q3 = df[col].quantile(0.75)
+            IQR = Q3 - Q1
+
+            limite_inferior = Q1 - 1.5 * IQR
+            limite_superior = Q3 + 1.5 * IQR
+
+            outliers_col = df[(df[col] < limite_inferior) | (df[col] > limite_superior)]
+            outliers = pd.concat([outliers, outliers_col])
+        return outliers.drop_duplicates()
 
 
 if __name__ == "__main__":

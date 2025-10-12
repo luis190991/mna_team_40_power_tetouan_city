@@ -23,12 +23,6 @@ class PowerPreprocessor:
         self.df = pd.read_csv(self.interim_path)
         logger.info(f"Datos cargados: {self.df.shape}")
 
-    def feature_engineering(self):
-        """Genera variables de tiempo, índices y rezagos."""
-        logger.info("Generando nuevas características...")
-
-        logger.info(f"Nuevas columnas generadas: {self.df.shape[1]} totales")
-
     def scale_and_split(self):
         """Escala variables numéricas y divide temporalmente el dataset."""
         logger.info("Escalando y dividiendo dataset...")
@@ -37,7 +31,6 @@ class PowerPreprocessor:
         val = pd.DataFrame({})
         test = pd.DataFrame({})
         df_final = pd.DataFrame({})
-
 
         scaler_path = os.path.join(self.model_dir, 'scaler.pkl')
         joblib.dump(self.scaler, scaler_path)
@@ -51,7 +44,6 @@ class PowerPreprocessor:
     def run_pipeline(self):
         """Ejecuta todo el flujo de preprocesamiento."""
         self.load_data()
-        self.feature_engineering()
         self.scale_and_split()
         logger.info("Preprocesamiento completado")
 
