@@ -1,7 +1,7 @@
 # 📊 Proyecto de MLops (Power Tetouan City)
-**Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM)**
-**Maestría en Inteligencia Artificial Aplicada**     
-**Curso:** Operaciones de Aprendizaje Automático  
+** Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM) **
+** Maestría en Inteligencia Artificial Aplicada **     
+** Curso:** Operaciones de Aprendizaje Automático ** 
 
 ---
 
@@ -41,7 +41,7 @@ El proyecto incluye las fases de:
         ├── viz  <- scripts for visualisation during EDA, modelling, error analysis etc. 
         ├── modeling    <- scripts for generating models
     |--- environment.yml <- file with libraries and library versions for recreating the analysis environment
-    |--- dvc.yaml <- file with libraries and library versions for recreating the analysis environment
+    |--- dvc.yaml <- file with process specification.
 ```
 
 ---
@@ -105,6 +105,8 @@ dvc diff
 | Luis Antonio Ramírez Martínez | A01796272 | Site Reliability Engineering |
 | Paulina Paz Hernández | A01652337 | Software Engineer |
 | Gabriel Leal Cantú | A01282101 | ML Engineer |
+
+Equipo #40
 
 ---
 
