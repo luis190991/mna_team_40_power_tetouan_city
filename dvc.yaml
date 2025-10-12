@@ -1,6 +1,6 @@
 stages:
   clean:
-    cmd: python src/data/clean_data.py
+    cmd: PYTHONPATH=src python src/data/clean_data.py
     deps:
       - src/data/clean_data.py
       - data/raw/power_tetouan_city_modified.csv
@@ -9,7 +9,7 @@ stages:
       - data/interim/power_tetouan_city_clean.csv
 
   preprocess:
-    cmd: python src/data/preprocess.py
+    cmd: PYTHONPATH=src python src/data/preprocess.py
     deps:
       - src/data/preprocess.py
       - data/interim/power_tetouan_city_clean.csv

@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import joblib
+from tools.logger import get_logger
 from sklearn.preprocessing import StandardScaler
 
 class PowerPreprocessor:
@@ -18,21 +19,19 @@ class PowerPreprocessor:
         self.scaler = None
 
     def load_data(self):
-        print(f"Cargando datos desde {self.interim_path}")
+        logger.info(f"Cargando datos desde {self.interim_path}")
         self.df = pd.read_csv(self.interim_path)
-        print(f"Datos cargados: {self.df.shape}")
+        logger.info(f"Datos cargados: {self.df.shape}")
 
-    # ----------------------------------------------------------
     def feature_engineering(self):
         """Genera variables de tiempo, índices y rezagos."""
-        print("Generando nuevas características...")
+        logger.info("Generando nuevas características...")
 
-        print(f"Nuevas columnas generadas: {self.df.shape[1]} totales")
+        logger.info(f"Nuevas columnas generadas: {self.df.shape[1]} totales")
 
-    # ----------------------------------------------------------
     def scale_and_split(self):
         """Escala variables numéricas y divide temporalmente el dataset."""
-        print("Escalando y dividiendo dataset...")
+        logger.info("Escalando y dividiendo dataset...")
         
         train = pd.DataFrame({})
         val = pd.DataFrame({})
@@ -47,21 +46,22 @@ class PowerPreprocessor:
         val.to_csv(os.path.join(self.processed_dir, 'val.csv'))
         test.to_csv(os.path.join(self.processed_dir, 'test.csv'))
         df_final.to_csv(os.path.join(self.processed_dir, 'power_tetouan_city_ready.csv'))
-        print("Datasets procesados y guardados")
+        logger.info("Datasets procesados y guardados")
 
-    # ----------------------------------------------------------
     def run_pipeline(self):
         """Ejecuta todo el flujo de preprocesamiento."""
         self.load_data()
         self.feature_engineering()
         self.scale_and_split()
-        print("Preprocesamiento completado")
+        logger.info("Preprocesamiento completado")
 
 
 if __name__ == "__main__":
     INTERIM_PATH = "data/interim/power_tetouan_city_clean.csv"
     PROCESSED_DIR = "data/processed"
     MODEL_DIR = "models"
+
+    logger = get_logger("preProcessor")
 
     preprocessor = PowerPreprocessor(INTERIM_PATH, PROCESSED_DIR, MODEL_DIR)
     preprocessor.run_pipeline()

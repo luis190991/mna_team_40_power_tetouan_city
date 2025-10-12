@@ -1,7 +1,9 @@
 import os
 import pandas as pd
+from tools.logger import get_logger
 
-class PowerCleaner:
+
+class Cleaner:
     """
     Clase encargada de limpiar el dataset crudo de consumo energético de Tetouan City.
     """
@@ -15,21 +17,21 @@ class PowerCleaner:
     def load_data(self):
         """Carga el dataset crudo y realiza validaciones iniciales."""
         self.df = pd.read_csv(self.raw_path)
-        print(f"Datos cargados: {self.df.shape[0]} filas, {self.df.shape[1]} columnas")
+        logger.info(f"Datos cargados: {self.df.shape[0]} filas, {self.df.shape[1]} columnas")
 
     def basic_cleaning(self):
         """Elimina duplicados, valores vacíos y corrige tipos de datos."""
-        print("Limpieza básica completada")
+        logger.info("Limpieza básica completada")
 
     def remove_outliers(self):
         """Detecta y corrige valores atípicos simples."""
-        print("Outliers tratados")
+        logger.info("Outliers tratados")
 
     def save_clean_data(self):
         """Guarda el dataset limpio."""
         os.makedirs(os.path.dirname(self.interim_path), exist_ok=True)
         self.df.to_csv(self.interim_path, index=False)
-        print(f"Dataset limpio guardado en {self.interim_path}")
+        logger.info(f"Dataset limpio guardado en {self.interim_path}")
 
     def run_pipeline(self):
         """Ejecuta todo el flujo de limpieza."""
@@ -37,12 +39,13 @@ class PowerCleaner:
         self.basic_cleaning()
         self.remove_outliers()
         self.save_clean_data()
-        print("Limpieza completada")
+        logger.info("Limpieza completada")
 
 
 if __name__ == "__main__":
     RAW_PATH = "data/raw/power_tetouan_city_modified.csv"
     INTERIM_PATH = "data/interim/power_tetouan_city_clean.csv"
 
-    cleaner = PowerCleaner(RAW_PATH, INTERIM_PATH)
+    logger = get_logger("cleaner")
+    cleaner = Cleaner(RAW_PATH, INTERIM_PATH)
     cleaner.run_pipeline()
