@@ -1,1 +1,8 @@
 /scaler.pkl
+/xgb_Zone 1 Power Consumption.pkl
+/xgb_Zone 2  Power Consumption.pkl
+/xgb_Zone 3  Power Consumption.pkl
+/svr_Zone 1 Power Consumption.pkl
+/svr_Zone 2  Power Consumption.pkl
+/svr_Zone 3  Power Consumption.pkl
+/metrics.json

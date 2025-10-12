@@ -64,3 +64,63 @@ stages:
       hash: md5
       md5: 2ee119615d21f0392d0b344bea37d665
       size: 1007
+  train:
+    cmd: PYTHONPATH=src python src/models/training.py
+    deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 9f0aa2b7b48e1e774635d84814f66564
+      size: 790648
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 72b3931c2f5b43650c5e02948cba24d1
+      size: 3688918
+    - path: data/processed/X_val.csv
+      hash: md5
+      md5: f1451c67ec53637929b4ec8bc4508e7d
+      size: 790515
+    - path: data/processed/Y_test.csv
+      hash: md5
+      md5: 29b99f37f924bce735afb98a52a3df01
+      size: 290648
+    - path: data/processed/Y_train.csv
+      hash: md5
+      md5: e1b6aade78143b93e06183c836e1b736
+      size: 1355236
+    - path: data/processed/Y_val.csv
+      hash: md5
+      md5: e9f92c7c4a94fa773cc243ae8d4f64b8
+      size: 290506
+    - path: src/models/training.py
+      hash: md5
+      md5: 7882a4bd483b6ab2c8654f9e014bbc37
+      size: 6634
+    outs:
+    - path: models/metrics.json
+      hash: md5
+      md5: 57a68db22b810b20852af4e27ee6ec22
+      size: 817
+    - path: models/svr_Zone 1 Power Consumption.pkl
+      hash: md5
+      md5: de43b97e2e13c9558d90f201880df58d
+      size: 1351702
+    - path: models/svr_Zone 2  Power Consumption.pkl
+      hash: md5
+      md5: 10d287eb1f73fed6d84c03ac0e5b6ad7
+      size: 1418046
+    - path: models/svr_Zone 3  Power Consumption.pkl
+      hash: md5
+      md5: 63a232786a9d5d6d814008f5a2b8df68
+      size: 1269566
+    - path: models/xgb_Zone 1 Power Consumption.pkl
+      hash: md5
+      md5: e28bca7a1462997b72d9866a21446f78
+      size: 550021
+    - path: models/xgb_Zone 2  Power Consumption.pkl
+      hash: md5
+      md5: 83e9870563fc0a961d9ec121fee20444
+      size: 547301
+    - path: models/xgb_Zone 3  Power Consumption.pkl
+      hash: md5
+      md5: 432a4079cd7421b2b4a802f3e219d49b
+      size: 550017
