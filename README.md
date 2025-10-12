@@ -1,7 +1,7 @@
 # 📊 Proyecto de MLops (Power Tetouan City)
-** Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM) **
-** Maestría en Inteligencia Artificial Aplicada **     
-** Curso:** Operaciones de Aprendizaje Automático ** 
+**Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM)**
+**Maestría en Inteligencia Artificial Aplicada**     
+**Curso:Operaciones de Aprendizaje Automático** 
 
 ---
 
