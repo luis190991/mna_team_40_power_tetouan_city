@@ -15,7 +15,10 @@ stages:
       - data/interim/power_tetouan_city_clean.csv
     outs:
       - data/processed/power_tetouan_city_ready.csv
-      - data/processed/train.csv
-      - data/processed/val.csv
-      - data/processed/test.csv
+      - data/processed/X_train.csv
+      - data/processed/X_val.csv
+      - data/processed/X_test.csv
+      - data/processed/Y_train.csv
+      - data/processed/Y_val.csv
+      - data/processed/Y_test.csv
       - models/scaler.pkl

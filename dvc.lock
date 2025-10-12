@@ -29,26 +29,38 @@ stages:
       size: 2793513
     - path: src/data/preprocess.py
       hash: md5
-      md5: 50b3b9c33005ba49b6919d2eaef4099c
-      size: 2055
+      md5: 794d14da3af1050b3610c69c81650691
+      size: 3354
     outs:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 9f0aa2b7b48e1e774635d84814f66564
+      size: 790648
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 72b3931c2f5b43650c5e02948cba24d1
+      size: 3688918
+    - path: data/processed/X_val.csv
+      hash: md5
+      md5: f1451c67ec53637929b4ec8bc4508e7d
+      size: 790515
+    - path: data/processed/Y_test.csv
+      hash: md5
+      md5: 29b99f37f924bce735afb98a52a3df01
+      size: 290648
+    - path: data/processed/Y_train.csv
+      hash: md5
+      md5: e1b6aade78143b93e06183c836e1b736
+      size: 1355236
+    - path: data/processed/Y_val.csv
+      hash: md5
+      md5: e9f92c7c4a94fa773cc243ae8d4f64b8
+      size: 290506
     - path: data/processed/power_tetouan_city_ready.csv
       hash: md5
-      md5: a227d42afbcc590b4e949075cde4a5b6
-      size: 3
-    - path: data/processed/test.csv
-      hash: md5
-      md5: a227d42afbcc590b4e949075cde4a5b6
-      size: 3
-    - path: data/processed/train.csv
-      hash: md5
-      md5: a227d42afbcc590b4e949075cde4a5b6
-      size: 3
-    - path: data/processed/val.csv
-      hash: md5
-      md5: a227d42afbcc590b4e949075cde4a5b6
-      size: 3
+      md5: decb259cbd31c5048f3ffee750eadc15
+      size: 2979564
     - path: models/scaler.pkl
       hash: md5
-      md5: 7d1e55650014e21b4568ed3e3d1fc531
-      size: 4
+      md5: 2ee119615d21f0392d0b344bea37d665
+      size: 1007
