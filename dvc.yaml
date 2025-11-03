@@ -33,10 +33,10 @@ stages:
       - data/processed/X_test.csv
       - data/processed/Y_test.csv
     outs:
-      - models/xgb_Zone 1 Power Consumption.pkl
-      - models/xgb_Zone 2  Power Consumption.pkl
-      - models/xgb_Zone 3  Power Consumption.pkl
-      - models/svr_Zone 1 Power Consumption.pkl
-      - models/svr_Zone 2  Power Consumption.pkl
-      - models/svr_Zone 3  Power Consumption.pkl
+      - models/xgb/xgb_zone_1_power_consumption_power.pkl
+      - models/xgb/xgb_zone_2__power_consumption_power.pkl
+      - models/xgb/xgb_zone_3__power_consumption_power.pkl
+      - models/svr/svr_zone_1_power_consumption_power.pkl
+      - models/svr/svr_zone_2__power_consumption_power.pkl
+      - models/svr/svr_zone_3__power_consumption_power.pkl
       - models/metrics.json

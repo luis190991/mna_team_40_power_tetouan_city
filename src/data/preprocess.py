@@ -64,7 +64,6 @@ class PowerPreprocessor:
         Y_test.to_csv(os.path.join(self.processed_dir,'Y_test.csv'), index=False)
         
 
-
         scaler_path = os.path.join(self.model_dir, 'scaler.pkl')
         joblib.dump(self.scaler, scaler_path)
 
