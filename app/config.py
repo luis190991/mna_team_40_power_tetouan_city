@@ -1,0 +1,11 @@
+import os
+
+MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "https://52.73.27.252/")
+MODEL_VERSION = os.getenv("MODEL_VERSION", "9")
+MLFLOW_USERNAME = "team40"
+#os.getenv("MLFLOW_TRACKING_USERNAME")
+MLFLOW_PASSWORD = "4721722Mna"
+#os.getenv("MLFLOW_TRACKING_PASSWORD")
+
+os.environ["MLFLOW_TRACKING_INSECURE_TLS"] = "true"
+os.environ["CURL_CA_BUNDLE"] = ""
