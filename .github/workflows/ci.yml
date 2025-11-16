@@ -37,6 +37,12 @@ jobs:
         run: |
           conda run -n ml_project pip install dvc[s3] mlflow pytest
 
+      - name: Configure DVC Remote
+        run: |
+          dvc remote add -d storage s3://mlops-mna-bucket
+          dvc remote modify storage access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          dvc remote modify storage secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       # 3. Pull DVC data
       - name: DVC Pull
         run: |
