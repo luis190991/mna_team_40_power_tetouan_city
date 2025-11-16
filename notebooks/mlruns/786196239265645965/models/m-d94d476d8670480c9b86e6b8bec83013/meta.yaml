@@ -1,0 +1,10 @@
+artifact_location: file:///mnt/c/Users/gabri/Documents/mna_team_40_power_tetouan_city/notebooks/mlruns/786196239265645965/models/m-d94d476d8670480c9b86e6b8bec83013/artifacts
+creation_timestamp: 1763327449944
+experiment_id: '786196239265645965'
+last_updated_timestamp: 1763327459610
+model_id: m-d94d476d8670480c9b86e6b8bec83013
+model_type: null
+name: xgb_pipeline
+source_run_id: 1647fc35f24f4a39b14bf87d88a49520
+status: 2
+status_message: null

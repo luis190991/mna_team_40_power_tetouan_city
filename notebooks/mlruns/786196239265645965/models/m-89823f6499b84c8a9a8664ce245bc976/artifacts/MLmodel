@@ -1,0 +1,41 @@
+artifact_path: file:///mnt/c/Users/gabri/Documents/mna_team_40_power_tetouan_city/notebooks/mlruns/786196239265645965/models/m-89823f6499b84c8a9a8664ce245bc976/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+is_signature_from_type_hint: false
+mlflow_version: 3.4.0
+model_id: m-89823f6499b84c8a9a8664ce245bc976
+model_size_bytes: 1652284
+model_uuid: m-89823f6499b84c8a9a8664ce245bc976
+prompts: null
+run_id: 9f8b2127988b43488db8fee393355e56
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "Temperature", "required": true}, {"type":
+    "double", "name": "Humidity", "required": true}, {"type": "double", "name": "Wind
+    Speed", "required": true}, {"type": "double", "name": "general diffuse flows",
+    "required": true}, {"type": "double", "name": "diffuse flows", "required": true},
+    {"type": "double", "name": "hour", "required": true}, {"type": "double", "name":
+    "day", "required": true}, {"type": "double", "name": "month", "required": true},
+    {"type": "double", "name": "year", "required": true}]'
+  outputs: '[{"type": "float", "name": "Zone 1 Power Consumption", "required": true},
+    {"type": "float", "name": "Zone 2  Power Consumption", "required": true}, {"type":
+    "float", "name": "Zone 3  Power Consumption", "required": true}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-11-16 21:23:18.376358'
