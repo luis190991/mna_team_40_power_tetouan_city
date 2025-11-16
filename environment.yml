@@ -4,24 +4,25 @@ channels:
   - defaults
 
 dependencies:
-  - python=3.11
-  - pip
-  - dvc[s3]
-  - pandas
+  - python=3.10         
   - numpy
+  - pandas
   - scikit-learn
   - matplotlib
   - seaborn
   - jupyter
   - pyyaml
   - boto3
+
+  - dvc
+  - dvc-s3
+
+  - xgboost
+
+  - mlflow
+
   - pip:
-      - dvc[s3]
-      - awscli
       - python-dotenv
       - hydra-core
-      - mlflow
       - jinja2_time
       - loguru
-      - xgboost
-      - mlflow

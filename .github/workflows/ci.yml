@@ -1,0 +1,63 @@
+name: CI/CD ML Power Consumption Project
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+
+  # ------------------------------------------------------
+  # 1) JOB: BUILD + TEST + DVC REPRO USING CONDA
+  # ------------------------------------------------------
+  build-test-train:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # 1. Install Conda (miniconda)
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ml_project
+          environment-file: environment.yml
+          auto-update-conda: false
+          use-only-tar-bz2: true
+          python-version: "3.10"
+
+      - name: Check Conda environment
+        run: |
+          conda info
+          conda list
+
+      # 2. Install DVC + MLflow on conda env
+      - name: Install DVC + MLflow
+        run: |
+          conda run -n ml_project pip install dvc[s3]==3.64.0 mlflow pytest
+
+      - name: Configure DVC Remote
+        run: |
+          conda run -n ml_project dvc remote modify storage access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          conda run -n ml_project dvc remote modify storage secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # 3. Pull DVC data
+      - name: DVC Pull
+        run: |
+          conda run -n ml_project dvc pull
+
+      # 4. Run tests
+      - name: Run Pytest
+        run: |
+          conda run -n ml_project pytest -q
+
+      # 5. Run DVC pipeline (training)
+      - name: Run DVC Repro
+        run: |
+          conda run -n ml_project dvc repro
+
+      # 6. Push trained artifacts back
+      - name: Push artifacts to DVC remote
+        run: |
+          conda run -n ml_project dvc push

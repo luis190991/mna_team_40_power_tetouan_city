@@ -1,5 +1,4 @@
 [core]
-    remote = s3remote
-    autostage = false
-['remote "s3remote"']
+    remote = storage
+['remote "storage"']
     url = s3://mlops-mna-bucket
