@@ -39,7 +39,6 @@ jobs:
 
       - name: Configure DVC Remote
         run: |
-          conda run -n ml_project dvc remote add -d storage s3://mlops-mna-bucket
           conda run -n ml_project dvc remote modify storage access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           conda run -n ml_project dvc remote modify storage secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
