@@ -21,9 +21,10 @@ jobs:
       - name: Set up Conda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          auto-update-conda: true
           activate-environment: ml_project
           environment-file: environment.yml
+          auto-update-conda: false
+          use-only-tar-bz2: true
           python-version: "3.10"
 
       - name: Check Conda environment
