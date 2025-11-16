@@ -35,7 +35,7 @@ jobs:
       # 2. Install DVC + MLflow on conda env
       - name: Install DVC + MLflow
         run: |
-          conda run -n ml_project pip install dvc[s3] mlflow pytest
+          conda run -n ml_project pip install dvc[s3]==3.64.0 mlflow pytest
 
       - name: Configure DVC Remote
         run: |
