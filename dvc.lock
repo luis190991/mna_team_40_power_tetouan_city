@@ -13,8 +13,8 @@ stages:
       size: 4196519
     - path: src/data/clean_data.py
       hash: md5
-      md5: c1e4ed064931109e7998ded3e99cbcc1
-      size: 3510
+      md5: d6ffe8d24834afb1b1498b7b63e58367
+      size: 3511
     outs:
     - path: data/interim/power_tetouan_city_clean.csv
       hash: md5
@@ -93,8 +93,8 @@ stages:
       size: 290506
     - path: src/models/training.py
       hash: md5
-      md5: 9005ce908be57fd478e5e53aa45d88cc
-      size: 11001
+      md5: 324613f762acbb3f1dd55346dbfe58be
+      size: 10906
     outs:
     - path: models/metrics.json
       hash: md5
@@ -102,15 +102,15 @@ stages:
       size: 817
     - path: models/svr/svr_zone_1_power_consumption_power.pkl
       hash: md5
-      md5: de43b97e2e13c9558d90f201880df58d
+      md5: 6c2feeaf0b08b13c5fc66722a78827c4
       size: 1351702
     - path: models/svr/svr_zone_2__power_consumption_power.pkl
       hash: md5
-      md5: 10d287eb1f73fed6d84c03ac0e5b6ad7
+      md5: db98a05053e0cedbc3d9080ed150608a
       size: 1418046
     - path: models/svr/svr_zone_3__power_consumption_power.pkl
       hash: md5
-      md5: 63a232786a9d5d6d814008f5a2b8df68
+      md5: 991cd46865c3bb5296642496daa88f7c
       size: 1269566
     - path: models/xgb/xgb_zone_1_power_consumption_power.pkl
       hash: md5
