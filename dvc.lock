@@ -1,0 +1,126 @@
+schema: '2.0'
+stages:
+  clean:
+    cmd: PYTHONPATH=src python src/data/clean_data.py
+    deps:
+    - path: data/raw/power_tetouan_city_modified.csv
+      hash: md5
+      md5: b86ef39f691bde959e50ca714aa1bcb5
+      size: 4510965
+    - path: data/raw/power_tetouan_city_original.csv
+      hash: md5
+      md5: 52e9bdd1060dfabba16f973f64162f1a
+      size: 4196519
+    - path: src/data/clean_data.py
+      hash: md5
+      md5: c1e4ed064931109e7998ded3e99cbcc1
+      size: 3510
+    outs:
+    - path: data/interim/power_tetouan_city_clean.csv
+      hash: md5
+      md5: c1b8e917258dc778a7460e3247a36bb1
+      size: 2793513
+  preprocess:
+    cmd: PYTHONPATH=src python src/data/preprocess.py
+    deps:
+    - path: data/interim/power_tetouan_city_clean.csv
+      hash: md5
+      md5: c1b8e917258dc778a7460e3247a36bb1
+      size: 2793513
+    - path: src/data/preprocess.py
+      hash: md5
+      md5: 9556f8915cb13e51ef16e0f0eb964557
+      size: 3353
+    outs:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 14956c25134c4f2e932fda1a5a4f2ddc
+      size: 790347
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 8dbc151a78376cd6a6a441ddb5d9478c
+      size: 3687270
+    - path: data/processed/X_val.csv
+      hash: md5
+      md5: 2a818649f3d1b70d8024d5421e7ad394
+      size: 790274
+    - path: data/processed/Y_test.csv
+      hash: md5
+      md5: dfa417d1a1da84ff10d11a3d1b3ba855
+      size: 290511
+    - path: data/processed/Y_train.csv
+      hash: md5
+      md5: b97416f0da8d6b5322ad34e084d14240
+      size: 1354722
+    - path: data/processed/Y_val.csv
+      hash: md5
+      md5: b0bc7c3b8689ad3d70a12732a8d8d9e9
+      size: 290453
+    - path: data/processed/power_tetouan_city_ready.csv
+      hash: md5
+      md5: decb259cbd31c5048f3ffee750eadc15
+      size: 2979564
+    - path: models/scaler.pkl
+      hash: md5
+      md5: 303e3777685a6770fdd02ec1aae1a201
+      size: 1007
+  train:
+    cmd: PYTHONPATH=src python src/models/training.py
+    deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 14956c25134c4f2e932fda1a5a4f2ddc
+      size: 790347
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 8dbc151a78376cd6a6a441ddb5d9478c
+      size: 3687270
+    - path: data/processed/X_val.csv
+      hash: md5
+      md5: 2a818649f3d1b70d8024d5421e7ad394
+      size: 790274
+    - path: data/processed/Y_test.csv
+      hash: md5
+      md5: dfa417d1a1da84ff10d11a3d1b3ba855
+      size: 290511
+    - path: data/processed/Y_train.csv
+      hash: md5
+      md5: b97416f0da8d6b5322ad34e084d14240
+      size: 1354722
+    - path: data/processed/Y_val.csv
+      hash: md5
+      md5: b0bc7c3b8689ad3d70a12732a8d8d9e9
+      size: 290453
+    - path: src/models/training.py
+      hash: md5
+      md5: 324613f762acbb3f1dd55346dbfe58be
+      size: 10906
+    outs:
+    - path: models/metrics.json
+      hash: md5
+      md5: 57a68db22b810b20852af4e27ee6ec22
+      size: 817
+    - path: models/svr/svr_zone_1_power_consumption_power.pkl
+      hash: md5
+      md5: 244ac051267fc51bd6582d02c6c098f7
+      size: 1351806
+    - path: models/svr/svr_zone_2__power_consumption_power.pkl
+      hash: md5
+      md5: a20bd1f6d3334d31498d3ac9852c71a0
+      size: 1418046
+    - path: models/svr/svr_zone_3__power_consumption_power.pkl
+      hash: md5
+      md5: 9b55926055829e7325c7f3a550e96e02
+      size: 1269830
+    - path: models/xgb/xgb_zone_1_power_consumption_power.pkl
+      hash: md5
+      md5: 43104310b13c9e5895692403bb6578ef
+      size: 550133
+    - path: models/xgb/xgb_zone_2__power_consumption_power.pkl
+      hash: md5
+      md5: 6e25765ab26ab9515787f1c51f8d7ebf
+      size: 547413
+    - path: models/xgb/xgb_zone_3__power_consumption_power.pkl
+      hash: md5
+      md5: 91be2073b9def55c5defaa5461be7419
+      size: 550129
