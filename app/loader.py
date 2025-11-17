@@ -1,10 +1,10 @@
 import mlflow
 import os
+from mlflow.tracking import MlflowClient
 from app.config import (
     MLFLOW_TRACKING_URI,
     MLFLOW_USERNAME,
-    MLFLOW_PASSWORD,
-    MODEL_VERSION
+    MLFLOW_PASSWORD
 )
 
 def setup_mlflow():
@@ -17,6 +17,23 @@ def setup_mlflow():
     # Certificado autofirmado
     os.environ["MLFLOW_TRACKING_INSECURE_TLS"] = "true"
     os.environ["CURL_CA_BUNDLE"] = ""
+
+
+def get_latest_model_version(model_name: str) -> int:
+    """
+    Obtiene la versión más reciente del modelo registrado en MLflow.
+    """
+    client = MlflowClient()
+    versions = client.search_model_versions(f"name='{model_name}'")
+
+    if not versions:
+        raise ValueError(f"No se encontraron versiones para el modelo '{model_name}'")
+
+    # Ordenar por número de versión y tomar el más alto
+    latest = max(versions, key=lambda v: int(v.version))
+
+    print(f"🔎 Última versión encontrada para '{model_name}': {latest.version}")
+    return int(latest.version)
 
 
 def load_model_for_zone(zone: int, svm: bool):
@@ -34,12 +51,12 @@ def load_model_for_zone(zone: int, svm: bool):
         3: "xgb_zone_3__power_consumption_power_consumption",
     }
 
-    name = model_names_xgb[zone]
+    name = model_names_svr[zone] if svm else model_names_xgb[zone]
 
-    if(svm):
-        name = model_names_svr[zone]
-        
-    model_uri = f"models:/{name}/{MODEL_VERSION}"
+    # Obtener versión más reciente del modelo
+    latest_version = get_latest_model_version(name)
+
+    model_uri = f"models:/{name}/{latest_version}"
     print(f"🔄 Cargando modelo desde: {model_uri}")
 
     return mlflow.pyfunc.load_model(model_uri)
