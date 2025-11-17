@@ -87,3 +87,24 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-power-api:latest
+  deploy-prod:
+      needs: build-api
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/main'
+
+  # ------------------------------------------------------
+  # 3) JOB: PROMOTE API TO PRODUCTION
+  # ------------------------------------------------------
+      steps:
+        - name: Deploy to EC2
+          uses: appleboy/ssh-action@v1.0.0
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ubuntu
+            key: ${{ secrets.EC2_SSH_KEY }}
+            script: |
+              docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ml-power-api:latest
+              docker stop ml-api || true
+              docker rm ml-api || true
+              docker run -d --name ml-api -p 80:8000 \
+                ${{ secrets.DOCKERHUB_USERNAME }}/ml-power-api:latest
