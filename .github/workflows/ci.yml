@@ -61,3 +61,29 @@ jobs:
       - name: Push artifacts to DVC remote
         run: |
           conda run -n ml_project dvc push
+
+  # ------------------------------------------------------
+  # 2) JOB: DOCKER BUILD FOR FASTAPI API
+  # ------------------------------------------------------
+  build-api:
+    runs-on: ubuntu-latest
+    needs: build-test-train
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Login to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ml-power-api:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ml-power-api:latest

@@ -277,9 +277,9 @@ class TrainingPhase:
                         registered_model_name=safe_name,
                         input_example=input_example
                     )
-                    logger.info(f"✅ Modelo registrado en MLflow: {safe_name}")
+                    logger.info(f"✅ Modelo registrado MLflow: {safe_name}")
                 except Exception as e:
-                    logger.error(f"⚠️ Error registrando en {safe_name}: {e}")
+                    logger.error(f"⚠️ Error registrando {safe_name}: {e}")
 
         # 8️⃣ Agregar etiquetas de contexto (metadatos)
         ml_logger.set_tags({
