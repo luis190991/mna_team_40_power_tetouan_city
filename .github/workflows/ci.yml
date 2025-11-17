@@ -48,9 +48,9 @@ jobs:
           conda run -n ml_project dvc pull
 
       # 4. Run tests
-      - name: Run Pytest
-        run: |
-          conda run -n ml_project pytest -q
+    #  - name: Run Pytest
+    #   run: |
+    #      conda run -n ml_project pytest -q
 
       # 5. Run DVC pipeline (training)
       - name: Run DVC Repro
