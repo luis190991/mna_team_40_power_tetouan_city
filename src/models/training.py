@@ -271,15 +271,28 @@ class TrainingPhase:
                 # Registrar modelo
                 try:
                     input_example = self.X_test.iloc[:1]
+
+                    # 1️⃣ Log del modelo (artefacto)
                     mlflow.sklearn.log_model(
                         sk_model=model,
-                        name=f"{model_type}_{zone.replace(' ', '_').lower()}",
-                        registered_model_name=safe_name,
+                        artifact_path=safe_name,    # <- reemplaza name=
                         input_example=input_example
                     )
-                    logger.info(f"✅ Modelo registrado MLflow: {safe_name}")
+
+                    run_id = mlflow.active_run().info.run_id
+                    model_uri = f"runs:/{run_id}/{safe_name}"
+
+                    # 2️⃣ Registrar en el Model Registry
+                    mlflow.register_model(
+                        model_uri=model_uri,
+                        name=safe_name
+                    )
+
+                    logger.info(f"✅ Modelo registrado en MLflow: {safe_name}")
+
                 except Exception as e:
                     logger.error(f"⚠️ Error registrando {safe_name}: {e}")
+
 
         # 8️⃣ Agregar etiquetas de contexto (metadatos)
         ml_logger.set_tags({
