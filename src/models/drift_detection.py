@@ -138,9 +138,6 @@ class DriftGenerator:
 class ModelEvaluator:
     @staticmethod
     def evaluate(y_true, y_pred):
-        """
-        Compatible con versiones antiguas de sklearn: calcular RMSE como sqrt(MSE).
-        """
         y_true = np.asarray(y_true).ravel()
         y_pred = np.asarray(y_pred).ravel()
 
@@ -157,9 +154,9 @@ class DriftPipeline:
         self.generator = DriftGenerator()
         self.utils = DriftUtils()
         self.evaluator = ModelEvaluator()
-        self.DRIFT_THRESHOLD = 0.10
-        self.PSI_THRESHOLD = 0.20
-        self.KS_THRESHOLD = 0.05
+        self.DRIFT_THRESHOLD = 0.20
+        self.PSI_THRESHOLD = 0.25
+        self.KS_THRESHOLD = 0.10
 
         # Targets mapping based on lo que me indicaste
         self.zone_target_map = {
@@ -270,12 +267,6 @@ class DriftPipeline:
             baseline_pred = np.asarray(baseline_pred).ravel()
             y_zone_arr = np.asarray(y_zone).ravel()
 
-            # Debug print de shapes (útiles si algo sale mal)
-            print("SHAPES DEBUG:")
-            print(" len(X_zone):", X_zone.shape)
-            print(" len(y_zone):", y_zone_arr.shape)
-            print(" len(baseline_pred):", baseline_pred.shape)
-
             if baseline_pred.shape[0] != y_zone_arr.shape[0]:
                 print(f"ERROR: mismatch de longitudes para {model_name}: y ({y_zone_arr.shape[0]}) vs preds ({baseline_pred.shape[0]}).")
                 continue
@@ -345,6 +336,16 @@ class DriftPipeline:
                 psi_flag = (psi is not None and psi > self.PSI_THRESHOLD)
                 ks_flag = (ks_p is not None and ks_p < self.KS_THRESHOLD)
                 alerta = metric_drop_flag or psi_flag or ks_flag
+
+                # Print de alertas
+                if alerta:
+                    print(f"🚨 ALERTA DE DRIFT en feature '{feature}'")
+                    print(f"   - Drop de métricas: {metric_drop_flag}")
+                    print(f"   - PSI ({psi:.4f}) > {self.PSI_THRESHOLD}: {psi_flag}")
+                    print(f"   - KS p-value ({ks_p:.4f}) < {self.KS_THRESHOLD}: {ks_flag}")
+                else:
+                    print(f"✅ Sin drift en feature '{feature}'")
+                    print(f"   PSI={psi:.4f}, KS_p={ks_p:.4f}")
 
                 # plots
                 os.makedirs("reports/drift_plots", exist_ok=True)
